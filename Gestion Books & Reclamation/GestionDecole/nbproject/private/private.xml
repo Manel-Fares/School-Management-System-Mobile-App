@@ -5,28 +5,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/BooksStat.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/Booking.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/Comment.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/utils/Statics.java</file>
             <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/BooksForm.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/Likes.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/services/ServiceReclamation.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/MyWishListeForm.java</file>
             <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/SideMenuEtudiantForm1.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/MyApplication.java</file>
             <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/CommentBookForm.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/services/ServiceComment.java</file>
             <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/ReclamationForm.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/Wishliste.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/Reclamation.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/services/ServiceWishliste.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/LoginForm.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/User.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/entities/Books.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/services/ServiceLike.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/services/ServiceBook.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/services/ServiceBooking.java</file>
-            <file>file:/C:/Users/Neifos/Documents/NetBeansProjects/GestionDecole/src/com/mycompany/myapp/gui/MyBooksForm.java</file>
         </group>
     </open-files>
 </project-private>

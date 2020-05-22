@@ -45,7 +45,30 @@ public class ServiceWishliste {
         }
         return instance;
     }
+    public ArrayList<Wishliste> getWishlisteByUser(){
+        ArrayList<Wishliste> Wish = new ArrayList<>();
+         for (Wishliste l : ServiceWishliste.getInstance().getAllWishliste()) {
 
+            if (User.getCurrentId().equals(l.getUser().getId().toString())) {
+                Wish.add(l);
+
+            }
+
+        }
+         return Wish;
+    }
+      public Wishliste checkWishliste(Books b) {
+        for (Wishliste l : ServiceWishliste.getInstance().getWishlisteByUser()) {
+
+            if ((l.getBook().getIdbook() == b.getIdbook())) {
+
+                return l;
+
+            }
+
+        }
+        return null;
+    }
     public boolean addWishliste(Wishliste t) {
         String url = Statics.BASE_URL + "/books/addWishlisteJson/"+t.getBook().getIdbook()+"/"+t.getUser().getId();
         req.setUrl(url);
