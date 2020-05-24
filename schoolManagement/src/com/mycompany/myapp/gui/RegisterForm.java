@@ -146,11 +146,12 @@ public class RegisterForm extends SideMenuAdminForm {
                 addConstraint(cin, new RegexConstraint(cinConstraint, "Please enter a valid cin number"));
 
         v.addSubmitButtons(addBtn);
-        Container mainContainer = GridLayout.encloseIn(2, BoxLayout.encloseY(
-                usernameLabel, nomLabel, prenomLabel, cinLabel, sexeLabel, dateNaissanceLabel, emailLabel, passwordLabel, telephoneLabel, roleLabel),
-                BoxLayout.encloseY(username, nom, prenom, cin, gender, dateBirth, email, password, telephone, role
-                ));
-
+        Container mainContainer = new Container(new GridLayout(10,2));
+                mainContainer.addAll(
+                usernameLabel,username, nomLabel, nom, prenomLabel,prenom,  cinLabel,cin, sexeLabel, gender,
+                        dateNaissanceLabel,dateBirth, emailLabel,email, passwordLabel,password,
+                        telephoneLabel,telephone,  roleLabel , role);
+                
         addBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
             if ((username.getText().length() == 0) || (password.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
@@ -160,7 +161,7 @@ public class RegisterForm extends SideMenuAdminForm {
                     User u = new User("", Integer.parseInt(cin.getText()), username.getText(), nom.getText(), prenom.getText(), email.getText(), Integer.parseInt(telephone.getText()), gender.getSelectedString(), password.getText(), role.getSelectedString());
                     if (UserService.getInstance().addUser(u)) {
                         Dialog.show("Success", "Account created", new Command("OK"));
-                        new RegisterForm(res).show();
+                      //  new RegisterForm(res).show();
                     } else {
                         Dialog.show("ERROR", "Server error", new Command("OK"));
                     }
