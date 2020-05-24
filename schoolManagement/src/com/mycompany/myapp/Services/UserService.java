@@ -109,10 +109,10 @@ public class UserService {
         return users;
     }
 
-    public boolean addUser(User user) {
+    public boolean addUser(User user, String filename) {
 
         String url = Statics.BASE_URL + "school/" + user.getUsername() + "/" + user.getNomUser() + "/" + user.getPrenomUser()
-                + "/" + user.getCinUser() + "/" + user.getEmail() + "/" + user.getSexeUser() + "/" + user.getPassword() + "/" + user.getRoleUser();
+                + "/" + user.getCinUser() + "/" + user.getEmail() + "/" + user.getSexeUser() + "/" + user.getPassword() + "/" + user.getRoleUser()+"/"+filename;
         req.setUrl(url);// Insertion de l'URL de notre demande de connexion
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

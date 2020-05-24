@@ -5,6 +5,7 @@
  */
 package com.mycompany.myapp.gui;
 
+import com.codename1.capture.Capture;
 import com.codename1.charts.util.ColorUtil;
 import static com.codename1.charts.util.ColorUtil.BLACK;
 import com.codename1.ui.Button;
@@ -33,6 +34,7 @@ import com.codename1.ui.validation.Validator;
 import com.mycompany.myapp.Services.UserService;
 import com.mycompany.myapp.entities.User;
 import java.util.Date;
+import rest.file.uploader.tn.FileUploader;
 
 public class RegisterForm extends SideMenuAdminForm {
 
@@ -42,7 +44,11 @@ public class RegisterForm extends SideMenuAdminForm {
     private Picker gender, role;
     private Container mainContainer;
     private Button addBtn;
-    private Resources theme = UIManager.initFirstTheme("/theme");
+    private FileUploader file;
+    String filename;
+    private String pathImg;
+  
+    private Resources theme = UIManager.initFirstTheme("/theme2");
 
     public RegisterForm(Resources res) {
         super(BoxLayout.y());
@@ -127,6 +133,8 @@ public class RegisterForm extends SideMenuAdminForm {
         dateBirth.setType(Display.PICKER_TYPE_DATE);
         dateBirth.setDate(new Date(0));
         dateBirth.getUnselectedStyle().setFgColor(BLACK);
+        Button btnPic = new Button("Profile Picture");
+        btnPic.setMaterialIcon(FontImage.MATERIAL_CLOUD_UPLOAD);
         addBtn = new Button("Register");
         addBtn.setUIID("LoginButton");
         // addBtn.getUnselectedStyle().setBgColor(0x0000A3);
@@ -151,6 +159,21 @@ public class RegisterForm extends SideMenuAdminForm {
                 dateNaissanceLabel, dateBirth, emailLabel, email, passwordLabel, password,
                 telephoneLabel, telephone, roleLabel, role);
 
+                        
+        btnPic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    pathImg = Capture.capturePhoto();
+                    String link = pathImg.toString();                  
+                    String path = link.substring(link.indexOf("/", 2) + 2, link.length());
+                    FileUploader fu = new FileUploader("http://localhost/projet/schoolMgt/web/img/blog");                 
+                    filename = fu.upload(""+path);
+                    String imgNameDB = "uploads/"+filename;
+                } catch (Exception ex) {
+                }
+            }
+        });
         addBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
             if ((username.getText().length() == 0) || (password.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
@@ -158,8 +181,7 @@ public class RegisterForm extends SideMenuAdminForm {
                 try {
 
                     User u = new User("", Integer.parseInt(cin.getText()), username.getText(), nom.getText(), prenom.getText(), email.getText(), Integer.parseInt(telephone.getText()), gender.getSelectedString(), password.getText(), role.getSelectedString());
-                    if (UserService.getInstance().addUser(u)) {
-                        Dialog.show("Success", "Account created", new Command("OK"));
+                    if (UserService.getInstance().addUser(u,filename)) {
                         //  new RegisterForm(res).show();
                         username.setText("");
                         nom.setText("");
@@ -168,8 +190,7 @@ public class RegisterForm extends SideMenuAdminForm {
                         email.setText("");
                         password.setText("");
                         telephone.setText("");
-                        addBtn = new Button("Register");
-                        addBtn.setUIID("LoginButton");
+                        Dialog.show("Success", "Account created", new Command("OK"));
 
                     } else {
                         Dialog.show("ERROR", "Server error", new Command("OK"));
@@ -188,6 +209,7 @@ public class RegisterForm extends SideMenuAdminForm {
         this.add(BorderLayout.centerAbsolute(nac));
 
         this.add(mainContainer);
+        add(BorderLayout.centerAbsolute(btnPic));
         add(BorderLayout.centerAbsolute(addBtn));
 
         //   this.add(BorderLayout.CENTER, addBtn);
