@@ -60,16 +60,15 @@ public class RegisterForm extends SideMenuAdminForm {
 
         tb.setTitleComponent(titleCmp);
         setupSideMenu(res);
-      
 
         username = new TextField();
         username.getUnselectedStyle().setFgColor(BLACK);
         nom = new TextField();
         nom.getUnselectedStyle().setFgColor(BLACK);
-       // nom.setUIID("TextField");
+        // nom.setUIID("TextField");
         prenom = new TextField();
         prenom.getUnselectedStyle().setFgColor(BLACK);
-       cin = new TextField();
+        cin = new TextField();
         cin.getUnselectedStyle().setFgColor(BLACK);
         cin.setConstraint(com.codename1.ui.TextArea.NUMERIC);
         email = new TextField();
@@ -123,11 +122,11 @@ public class RegisterForm extends SideMenuAdminForm {
         role.setType(Display.PICKER_TYPE_STRINGS);
         role.setStrings("ROLE_ADMINISTRATEUR", "ROLE_ETUDIANT", "ROLE_ENSEIGNANT", "ROLE_PERSONNEL");
         role.setSelectedString("ROLE_ETUDIANT");
+        role.getUnselectedStyle().setFgColor(BLACK);
         Picker dateBirth = new Picker();
         dateBirth.setType(Display.PICKER_TYPE_DATE);
         dateBirth.setDate(new Date(0));
         dateBirth.getUnselectedStyle().setFgColor(BLACK);
-      
         addBtn = new Button("Register");
         addBtn.setUIID("LoginButton");
         // addBtn.getUnselectedStyle().setBgColor(0x0000A3);
@@ -146,12 +145,12 @@ public class RegisterForm extends SideMenuAdminForm {
                 addConstraint(cin, new RegexConstraint(cinConstraint, "Please enter a valid cin number"));
 
         v.addSubmitButtons(addBtn);
-        Container mainContainer = new Container(new GridLayout(10,2));
-                mainContainer.addAll(
-                usernameLabel,username, nomLabel, nom, prenomLabel,prenom,  cinLabel,cin, sexeLabel, gender,
-                        dateNaissanceLabel,dateBirth, emailLabel,email, passwordLabel,password,
-                        telephoneLabel,telephone,  roleLabel , role);
-                
+        Container mainContainer = new Container(new GridLayout(10, 2));
+        mainContainer.addAll(
+                usernameLabel, username, nomLabel, nom, prenomLabel, prenom, cinLabel, cin, sexeLabel, gender,
+                dateNaissanceLabel, dateBirth, emailLabel, email, passwordLabel, password,
+                telephoneLabel, telephone, roleLabel, role);
+
         addBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
             if ((username.getText().length() == 0) || (password.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
@@ -161,7 +160,17 @@ public class RegisterForm extends SideMenuAdminForm {
                     User u = new User("", Integer.parseInt(cin.getText()), username.getText(), nom.getText(), prenom.getText(), email.getText(), Integer.parseInt(telephone.getText()), gender.getSelectedString(), password.getText(), role.getSelectedString());
                     if (UserService.getInstance().addUser(u)) {
                         Dialog.show("Success", "Account created", new Command("OK"));
-                      //  new RegisterForm(res).show();
+                        //  new RegisterForm(res).show();
+                        username.setText("");
+                        nom.setText("");
+                        prenom.setText("");
+                        cin.setText("");
+                        email.setText("");
+                        password.setText("");
+                        telephone.setText("");
+                        addBtn = new Button("Register");
+                        addBtn.setUIID("LoginButton");
+
                     } else {
                         Dialog.show("ERROR", "Server error", new Command("OK"));
                     }
@@ -176,7 +185,7 @@ public class RegisterForm extends SideMenuAdminForm {
         nac.getUnselectedStyle().setFgColor(ColorUtil.rgb(153, 0, 76));
         nac.getUnselectedStyle().setFont(l1_font);
         this.getAllStyles().setBgImage(theme.getImage("registerbg.jpg"));
-                this.add(BorderLayout.centerAbsolute(nac));
+        this.add(BorderLayout.centerAbsolute(nac));
 
         this.add(mainContainer);
         add(BorderLayout.centerAbsolute(addBtn));
