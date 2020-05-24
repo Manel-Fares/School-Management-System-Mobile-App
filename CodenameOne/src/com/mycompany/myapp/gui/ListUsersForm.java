@@ -81,7 +81,7 @@ public class ListUsersForm extends SideMenuAdminForm {
 
             Label prenom = new Label("  "+user.getPrenomUser() + " " + user.getNomUser());
             Label email = new Label(user.getEmail());
-            Label numtel = new Label("  "+user.getCinUser()+"");
+            Label numtel = new Label("  "+user.getNumTelUser()+"");
                         Button delete = new Button();
 
 

@@ -71,7 +71,7 @@ public class UserService {
                 int id = (int) idE;
                 u.setId(String.valueOf(id));
                 u.setUsername(obj.get("username").toString());
-                float cin = Float.parseFloat(obj.get("numteluser").toString());
+                float cin = Float.parseFloat(obj.get("cinuser").toString());
                 int numcin = (int) cin;
                 u.setCinUser(numcin);
              //   System.out.println("*********************" + obj.get("cinuser").toString());

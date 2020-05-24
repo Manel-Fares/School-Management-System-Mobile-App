@@ -19,11 +19,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Map;/*
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+import com.twilio.type.PhoneNumber;*/
 
 
 
@@ -406,7 +406,7 @@ public class ServiceAbsence {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
-    public void sendsms(int str,int nbr){
+    public void sendsms(int str,int nbr){/*
              Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
                     Message message = Message.creator(
                             new PhoneNumber("+216"+str), // To number
@@ -414,6 +414,6 @@ public class ServiceAbsence {
                             "You got an extra number of absence take care , Total Absnece :"+nbr // SMS body
                     ).create();
                     System.out.println(message.getSid());
-    }
+    */}
 
 }
