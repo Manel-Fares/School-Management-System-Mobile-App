@@ -43,7 +43,31 @@ public class ServiceLike {
         }
         return instance;
     }
+    public ArrayList<Likes> getLikesByUser(){
+            ArrayList<Likes> likess = new ArrayList<>();
+        
+         for (Likes l : ServiceLike.getInstance().getAllLikes()) {
 
+            if (User.getCurrentId().equals(l.getUser().getId().toString())) {
+                likess.add(l);
+
+            }
+
+        }
+         return likess;
+        
+    }
+      public Likes checkLike(Books b) {
+        for (Likes l : ServiceLike.getInstance().getLikesByUser()) {
+            if ((l.getBook().getIdbook() == b.getIdbook())) {
+
+                return l;
+
+            }
+
+        }
+        return null;
+    }
     public boolean addLike(Likes l) {
       
         String url = Statics.BASE_URL + "/books/newlike/" + l.getBook().getIdbook() + "/" + l.getUser().getId();

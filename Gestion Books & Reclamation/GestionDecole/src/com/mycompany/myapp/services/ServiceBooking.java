@@ -43,6 +43,31 @@ public class ServiceBooking {
         }
         return instance;
     }
+    public ArrayList<Booking> getBookingByUser(){
+        ArrayList<Booking> bbking = new ArrayList<>();
+           for (Booking bb : ServiceBooking.getInstance().getAllBooking()) {
+
+            if (User.getCurrentId().equals(bb.getUser().getId().toString())) {
+                bbking.add(bb);
+
+            }
+
+        }
+           return bbking;
+    }
+    
+       public Booking checkBooking(Books b) {
+        for (Booking l : ServiceBooking.getInstance().getBookingByUser()) {
+
+            if ((l.getBook().getIdbook() == b.getIdbook())) {
+
+                return l;
+
+            }
+
+        }
+        return null;
+    }
     public boolean deleteBooking(Booking t) {
         System.out.println(t);
         String url = Statics.BASE_URL + "/books/deleteJsonBooking/"+ t.getIdBooking();
