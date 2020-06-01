@@ -25,6 +25,76 @@
         </div>
     </section>
 
+    <!--================Contact Area =================-->
+    <section class="contact_area p_120">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="contact_info">
+                        <div class="info_item">
+                            <i class="lnr lnr-home"></i>
+                            <h6>2 rue André Ampère  2083  </h6>
+                            <p>Pôle Technologique - El Ghazala</p>
+                        </div>
+                        <div class="info_item">
+                            <i class="lnr lnr-phone-handset"></i>
+                            <h6><a href="#">T (216) 70 250 000</a></h6>
+                            <p>Mon to Fri 9am to 6 pm</p>
+                        </div>
+                        <div class="info_item">
+                            <i class="lnr lnr-envelope"></i>
+                            <h6><a href="#">contact@esprit.tn</a></h6>
+                            <p>Send us your query anytime!</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="col-lg-9">
+                    {{ form_start(form) }}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_widget(form.name) }}
+                                {{ form_errors(form.name) }}
+                            </div>
+                            <div class="form-group">
+
+                                {{ form_widget(form.email) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.subject) }}
+                                {{ form_errors(form.subject) }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <div class="form-group">
+                                {{ form_widget(form.message) }}
+                                {{ form_errors(form.message) }}
+                            </div>
+                        </div>
+                    <div style="display:none">
+                        {{ form_rest(form) }}
+                    </div>
+                        <div class="col-md-12 ">
+                            <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
+
+                            {{ form_end(form) }}
+                        </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     {#<script>
 
@@ -46,4 +116,5 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9JmJv8Bm7Z1K8k7d0tP9EIp0qzBuAKv8&callback=initMap">
     </script>#}
+
 {% endblock %}

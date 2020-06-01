@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="{{ asset('front/scss/_about.scss') }}">
         <link rel="stylesheet" href="{{ asset('front/scss/_header.scss') }}">
 
+
     {% endblock %}
 </head>
 <body>
@@ -47,40 +48,10 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ path('evenement_Proche') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('school_map') }}">Location</a></li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Event</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ path('evenement_image') }}"> Events</a>
-                                <li class="nav-item"><a class="nav-link" href="{{ path('EvenementClub') }}"> your Events</a>
-                                <li class="nav-item"><a class="nav-link" href="{{ path('club_show_image') }}">Clubs</a></li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('homepage') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('school_map') }}">About</a></li>
 
-
-
-                        <li class="nav-item submenu dropdown ">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item submenu dropdown ">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Class</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ path('abcenseetud')}}">Absences</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ path('empleetud')}}">Emplois</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ path('demandeevenement_new') }}">Request Events</a></li>
-                                <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('school_map') }}">Contact</a></li>
                     </ul>{% block logout %}
                     <a  href="{{ path('fos_user_security_login') }}" class="btn btn-info btn-lg" style="margin-left: +5%;size: -5px">
                         <span class="glyphicon glyphicon-log-out"></span> Login
@@ -90,23 +61,19 @@
         </nav>
     </div>
 
-
 </header>
 {% block img %}
-<section class="banner_area">
-    <div class="banner_inner d-flex align-items-center">
-        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-        <div class="container">
-            <div class="banner_content text-center">
-                <h2>{% block titleBarre %}{% endblock %}
-                </h2>
-                <div class="page_link">
-                    <a href="index.html">Home</a>
+    <section class="home_banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h3>We Ensure better education <br />for a better world</h3>
+                    <a class="main_btn" href="#">Get Started</a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
 {% endblock %}
 
