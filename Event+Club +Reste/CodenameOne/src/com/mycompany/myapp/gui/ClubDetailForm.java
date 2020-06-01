@@ -31,11 +31,12 @@ import com.mycompany.myapp.Services.ServiceRate;
 import com.mycompany.myapp.entities.Club;
 import com.mycompany.myapp.entities.Rating;
 import com.mycompany.myapp.entities.User;
-import com.mycompany.myapp.utils.Statics;
+
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  *
@@ -55,7 +56,7 @@ public class ClubDetailForm extends SideMenuEtudiantForm1 {
         s.setBgTransparency(0);
     }
 
-    private Slider createStarRankSlider(Resources res,int r, int idd) {
+    private Slider createStarRankSlider(Resources res, int r, int idd) {
         Slider starRank = new Slider();
         starRank.setEditable(true);
         starRank.setMinValue(0);
@@ -78,8 +79,8 @@ public class ClubDetailForm extends SideMenuEtudiantForm1 {
             public void actionPerformed(ActionEvent evt) {
                 Club c = new Club((int) idd);
                 Rating r = new Rating((double) starRank.getProgress(), c, User.getCurrentuser());
-           //     System.out.println("rate" + r);
-             //   System.out.println(starRank.getProgress());
+                //     System.out.println("rate" + r);
+                //   System.out.println(starRank.getProgress());
                 if (ServiceRate.getInstance().addRate(r)) {
                     Dialog.show("Success", "Club has been rated", new Command("OK"));
                     new ListClubForm(res).show();
@@ -108,10 +109,7 @@ public class ClubDetailForm extends SideMenuEtudiantForm1 {
         )
         );
 
-    
-        
         //  Form current;
-
         //    current = this;
         //  System.out.println("azdzadza"+id);
         Map<Club, Float> clubs = new HashMap<>();
@@ -122,47 +120,60 @@ public class ClubDetailForm extends SideMenuEtudiantForm1 {
             //System.out.println("clubsmmm"+clubs.entrySet());
             //System.out.println("club name "+entry.getKey().getNomClub()+"rate"+entry.getValue());
             try {
-               Container c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-                Label l = new Label(entry.getKey().getNomClub());
-                setTitle(l.getText());
+                Container c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+
+                
                 float idd = Float.parseFloat(entry.getValue().toString());
                 int rate = ((int) idd);
+                Image respo = Image.createImage("/management.png");
+                Image d = Image.createImage("/domaine.png");
+                Image name = Image.createImage("/name.png");
+                Label l = new Label("Club Name:  " + entry.getKey().getNomClub(), name);
+                setTitle(l.getText());
+                Label ratte=new Label("Rate:");
                 Label l0 = new Label("" + entry.getValue());
-                Label l1 = new Label("Domain :"+entry.getKey().getDomaine());
-                Label l2 = new Label("Responsable :"+entry.getKey().getResponsable().getUsername());
+                Label l1 = new Label("Domain :  " + entry.getKey().getDomaine(), d);
+                Label l2 = new Label("Responsable :  " + entry.getKey().getResponsable().getUsername(), respo);
                 // Label l3 = new Label(""+entry.getKey().getResponsable().getId());
                 //  l3.setVisible(false);
                 String url = "http://localhost/projet/schoolMgt/web/images/" + entry.getKey().getImage();
                 ec = EncodedImage.create("/pic.jpeg");
                 imgg = URLImage.createToStorage(ec, url, url, URLImage.RESIZE_SCALE);
                 iv = new ImageViewer(imgg);
+       
+              
                 c1.add(iv);
-                c1.add(FlowLayout.encloseCenter(createStarRankSlider(res,rate, id)));
+                c1.add(FlowLayout.encloseCenter(createStarRankSlider(res, rate, id)));
+          
                 c1.add(l);
                 c1.add(l1);
                 c1.add(l2);
                 // c1.add(l3);
                 //
                 Container c = new Container(new BoxLayout(BoxLayout.X_AXIS));
-                c.add(l0);
+                
                 Slider ra = new Slider();
                 String pp = entry.getValue().toString();
                 float nbrrate = Float.parseFloat(pp);
                 ra.setProgress((int) nbrrate);
-                ra.setMinValue(0);
-                ra.setMaxValue(5);
-                ra.setWidth(20);
+                c.add(ratte);
                 c.add(ra);
-                Container c2 = new Container(new BoxLayout(BoxLayout.X_AXIS));
+               
+                c.add(l0);
                 c1.add(c);
+                Container c2 = new Container(new BoxLayout(BoxLayout.X_AXIS));
+               
                 c2.add(c1);
+               
                 add(c2);
+               getStyle().setBgColor(0xFFFFFF);
+               getStyle().setBgTransparency(255);
                 //l.addPointerPressedListener(e-> new ClubDetailForm(current,Integer.parseInt(l3.getText())).show());
             } catch (IOException ex) {
                 ex.getMessage();
             }
         }
-            tb.setTitleComponent(titleCmp);
+        tb.setTitleComponent(titleCmp);
         setupSideMenu(res);
         //      getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 

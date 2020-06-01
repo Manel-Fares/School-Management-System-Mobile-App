@@ -17,7 +17,7 @@ public class Club {
     private String nomClub;
     private String domaine;
     private String image;
-        
+    private Float rating;
         
 
     public Club() {
@@ -25,6 +25,15 @@ public class Club {
 
     public Club(String nomClub) {
         this.nomClub = nomClub;
+    }
+
+    public Club(int idClub, User Responsable, String nomClub, String domaine, String image, Float rating) {
+        this.idClub = idClub;
+        this.Responsable = Responsable;
+        this.nomClub = nomClub;
+        this.domaine = domaine;
+        this.image = image;
+        this.rating = rating;
     }
 
     public Club(int idClub, User Responsable, String nomClub, String domaine, String image) {
@@ -106,10 +115,20 @@ public class Club {
         this.image = image;
     }
 
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
-        return "Club{" + "idClub=" + idClub + ", Responsable=" + Responsable + ", nomClub=" + nomClub + ", domaine=" + domaine + ", image=" + image + '}';
+        return "Club{" + "idClub=" + idClub + ", Responsable=" + Responsable + ", nomClub=" + nomClub + ", domaine=" + domaine + ", image=" + image + ", rating=" + rating + '}';
     }
+
+ 
 
     
   

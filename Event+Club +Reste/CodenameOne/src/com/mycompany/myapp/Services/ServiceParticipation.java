@@ -38,7 +38,7 @@ public class ServiceParticipation {
     private ConnectionRequest req;
     private ConnectionRequest cr;
 
-    private ServiceParticipation() {
+    public ServiceParticipation() {
         req = new ConnectionRequest();
     }
 
@@ -51,7 +51,7 @@ public class ServiceParticipation {
 
     public Map<Evenement, Integer> parseEvenement(String jsonText) {
         Map<Evenement, Integer> hm = new HashMap();
-        System.out.println("ggggggg");
+       // System.out.println("ggggggg");
 
         try {
 
@@ -59,9 +59,9 @@ public class ServiceParticipation {
             u = new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String, Object> tasksListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            System.out.println("tasksListJson: " + tasksListJson);
+         //   System.out.println("tasksListJson: " + tasksListJson);
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
-              System.out.println("list: " + list);
+            //  System.out.println("list: " + list);
             for (Map<String,Object> obj : list) {
 
                 Evenement e = new Evenement();
@@ -80,7 +80,8 @@ public class ServiceParticipation {
                 {
                 int nbrParticipants=(int)Float.parseFloat(obj.get("x").toString());
                 hm.put(e, nbrParticipants);
-                System.out.println("hm" + hm);}
+             //   System.out.println("hm" + hm);
+                }
             }
 
         } catch (IOException ex) {
@@ -90,20 +91,20 @@ public class ServiceParticipation {
     }
 
     public Map<Evenement, Integer> getEeventDetail(int id) {
-       // System.out.println("idddd:   " + id);
+       //// System.out.println("idddd:   " + id);
          String url = Statics.BASE_URL + "user/event/alldetail/"+id ;
         cr = new ConnectionRequest(url);
         //   cr.setUrl(url);
-        System.out.println("cr: " + cr.getUrl());
+      //  System.out.println("cr: " + cr.getUrl());
 
         cr.addResponseListener(new ActionListener<NetworkEvent>() {
 
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                System.out.println("hello omaa jmai ");
+             //   System.out.println("hello omaa jmai ");
                 String res = new String(cr.getResponseData());
 
-                System.out.println(res);
+              //  System.out.println(res);
                 Evenemnts = parseEvenement(res);
                 //System.out.println("bbb :" + Evenemnts);
 
@@ -123,9 +124,9 @@ public class ServiceParticipation {
             u = new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String, Object> tasksListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            System.out.println("tasksListJson: " + tasksListJson);
+          //  System.out.println("tasksListJson: " + tasksListJson);
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
-              System.out.println("list: " + list);
+            //  System.out.println("list: " + list);
                   Club c=new Club();
             for (Map<String,Object> obj : list) {
 
@@ -141,7 +142,7 @@ public class ServiceParticipation {
                // float id = Float.parseFloat(obj.get("idclub").toString());
               
                 Evenementt.add(e);
-                System.out.println("xx: "+(obj.get("x").toString()));
+             //   System.out.println("xx: "+(obj.get("x").toString()));
                 int nbrParticipants=(int)Float.parseFloat(obj.get("x").toString());
                 hm.put(e, nbrParticipants);
                 //System.out.println("hm" + hm);
@@ -158,18 +159,18 @@ public class ServiceParticipation {
          String url = Statics.BASE_URL + "user/event/nbrPartEvent/";
         cr = new ConnectionRequest(url);
         //   cr.setUrl(url);
-        System.out.println("cr: " + cr.getUrl());
+      //  System.out.println("cr: " + cr.getUrl());
 
         cr.addResponseListener(new ActionListener<NetworkEvent>() {
 
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                System.out.println("hello omaa jmai ");
+          //      System.out.println("hello omaa jmai ");
                 String res = new String(cr.getResponseData());
 
-                System.out.println(res);
+            //    System.out.println(res);
                 Evenemnts = parseEvenementNBrParticipation(res);
-               System.out.println("bbb :" + Evenemnts);
+             //  System.out.println("bbb :" + Evenemnts);
 
             }
         });
@@ -193,14 +194,14 @@ public class ServiceParticipation {
   boolean xx=false;
     public boolean getTestPart(int id,int idd) {
         
-        String url = "http://localhost/projet/schoolMgt/web/app_dev.php/user/club/1";
-        System.out.println(url);
+        String url = "http://localhost/projet/schoolMgt/web/app_dev.php/user/event/test/"+id+"/"+idd;
+      //  System.out.println(url);
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
                 String res = new String(req.getResponseData());
-                System.out.println("resultats user Part: "+res);
+          //      System.out.println("resultats user Part: "+res);
                 xx = parseTestPart(res);
 
             }
@@ -210,7 +211,7 @@ public class ServiceParticipation {
     }
     boolean yy=true;
  public boolean parseTestPart(String jsonText)  {
-     System.out.println("jsonText parseTestPart: "+jsonText);
+    // System.out.println("jsonText parseTestPart: "+jsonText);
       if(jsonText.equals("[]"))
          {
                 return false;

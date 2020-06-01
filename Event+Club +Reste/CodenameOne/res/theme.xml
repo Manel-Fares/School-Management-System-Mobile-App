@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+<resource majorVersion="1" minorVersion="9" useXmlUI="false">
     <image name="BackgroundRect.png" type="multi"  />
+    <image name="bck1.png"  />
     <image name="bk.jpg"  />
     <image name="duke.png" type="multi"  />
     <image name="gradient-overlay.png"  />
-    <image name="l.jpg"  />
+    <image name="graduation.jpg"  />
     <image name="l2.jpg"  />
     <image name="login-background.jpg"  />
     <image name="logo.png"  />
@@ -164,14 +165,14 @@
         <gradient key="SideNavigationPanel.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
         <val key="SideNavigationPanel.bgType" value="0" />
         <border key="SideNavigationPanel.border" type="empty" />
-        <val key="SideNavigationPanel.margin" value="0,0,0,0" />
-        <val key="SideNavigationPanel.padding" value="0,0,0,0" />
+        <val key="SideNavigationPanel.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="SideNavigationPanel.padding" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.transparency" value="255" />
-        <val key="SidemenuTop.bgImage" value="sidemenu-top.png" />
+        <val key="SidemenuTop.bgImage" value="graduation.jpg" />
         <val key="SidemenuTop.bgType" value="33" />
-        <val key="SidemenuTop.margin" value="0,0,0,0" />
+        <val key="SidemenuTop.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SidemenuTop.padUnit" value="2,2,2,2" />
-        <val key="SidemenuTop.padding" value="20,2,2,2" />
+        <val key="SidemenuTop.padding" value="20.0,2.0,2.0,2.0" />
         <val key="SkipButton.align" value="4" />
         <val key="SkipButton.bgColor" value="ffffff" />
         <val key="SkipButton.fgColor" value="3c464f" />
@@ -210,11 +211,10 @@
         <val key="SubTitle.transparency" value="0" />
         <val key="TextField.bgImage" value="text-field-underline.png" />
         <val key="TextField.bgType" value="30" />
-        <border key="TextField.border" type="empty" />
-        <val key="TextField.fgColor" value="ffffff" />
-        <font key="TextField.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <val key="TextField.fgColor" value="0" />
+        <font key="TextField.font" type="ttf" face="0" style="1" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="TextField.padUnit" value="2,2,2,2" />
-        <val key="TextField.padding" value="1,1,1,1" />
+        <val key="TextField.padding" value="1.0,1.0,1.0,1.0" />
         <val key="TextField.sel#bgImage" value="text-field-underline.png" />
         <val key="TextField.sel#bgType" value="21" />
         <border key="TextField.sel#border" type="empty" />
@@ -223,10 +223,10 @@
         <val key="TextField.sel#transparency" value="0" />
         <val key="TextField.transparency" value="0" />
         <val key="Title.fgColor" value="ffffff" />
-        <font key="Title.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
-        <val key="Title.margin" value="0,0,0,0" />
+        <font key="Title.font" type="ttf" face="0" style="2" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
+        <val key="Title.margin" value="0.0,0.0,0.0,0.0" />
         <val key="Title.padUnit" value="2,2,2,2" />
-        <val key="Title.padding" value="1,1,1,1" />
+        <val key="Title.padding" value="1.0,1.0,1.0,1.0" />
         <val key="Title.press#fgColor" value="ffffff" />
         <font key="Title.press#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
         <val key="Title.press#margin" value="0,0,0,0" />
@@ -268,11 +268,11 @@
         <val key="TodayTitle.padUnit" value="2,2,2,2" />
         <val key="TodayTitle.padding" value="5,3,2,1" />
         <val key="TodayTitle.transparency" value="0" />
-        <val key="Toolbar.bgImage" value="BackgroundRect.png" />
+        <val key="Toolbar.bgImage" value="bck1.png" />
         <val key="Toolbar.bgType" value="33" />
         <border key="Toolbar.border" type="empty" />
-        <val key="Toolbar.margin" value="0,0,0,0" />
-        <val key="Toolbar.padding" value="0,0,0,0" />
+        <val key="Toolbar.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="Toolbar.padding" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruBody.align" value="4" />
         <val key="WalkthruBody.fgColor" value="ffffff" />
         <font key="WalkthruBody.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
@@ -308,5 +308,4 @@
         <val key="transparency" value="0" />
     </theme>
     <image name="unselected-walkthru.png" type="multi"  />
-    <image name="user-picture.jpg"  />
 </resource>

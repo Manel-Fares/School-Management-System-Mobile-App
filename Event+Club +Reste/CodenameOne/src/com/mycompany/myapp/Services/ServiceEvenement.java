@@ -17,6 +17,7 @@ import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,9 +73,9 @@ public class ServiceEvenement {
             JSONParser j = new JSONParser();
             Map<String, Object> tasksListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
             //System.out.println(tasksListJson);
-            System.out.println("jesontext parseEvenements: " + jsonText);
+            // System.out.println("jesontext parseEvenements: " + jsonText);
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
-            System.out.println("List parseEvenements: " + list);
+            //System.out.println("List parseEvenements: " + list);
             for (Map<String, Object> obj : list) {
                 Evenement e = new Evenement();
                 float id = Float.parseFloat(obj.get("idevenement").toString());
@@ -91,7 +92,7 @@ public class ServiceEvenement {
 
                     if (entry.getKey().contains("idclub")) {
                         String pp = entry.getValue().toString();
-                        System.out.println(pp);
+                        // System.out.println(pp);
                         float idd = Float.parseFloat(pp);
                         t.setIdClub((int) idd);
 //                        u.setUsername(entry.getValue().toString());
@@ -100,7 +101,7 @@ public class ServiceEvenement {
                         t.setNomClub(entry.getValue().toString());
                     }
                     if (entry.getKey().contains("idresponsable")) {
-                        System.out.println("Responsable: " + entry.getValue().getClass());
+                        //  System.out.println("Responsable: " + entry.getValue().getClass());
                         LinkedHashMap<String, Object> bb = (LinkedHashMap) entry.getValue();
 
                         for (Map.Entry<String, Object> entryy : bb.entrySet()) {
@@ -133,4 +134,61 @@ public class ServiceEvenement {
         return Evenementt;
     }
 
+    public Map<Evenement, Integer> getEeventClubNbrParticipation(int id) {
+        // System.out.println("idddd:   " + id);
+        String url = Statics.BASE_URL + "user/eventcl/5";
+        cr = new ConnectionRequest(url);
+        //   cr.setUrl(url);
+        //  System.out.println("cr: " + cr.getUrl());
+
+        cr.addResponseListener(new ActionListener<NetworkEvent>() {
+
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                //      System.out.println("hello omaa jmai ");
+                String res = new String(cr.getResponseData());
+
+                //    System.out.println(res);
+                Evenements = parseEvenementNBrParticipation(res);
+                //  System.out.println("bbb :" + Evenemnts);
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(cr);
+        return Evenements;
+    }
+
+    public Map<Evenement, Integer> parseEvenementNBrParticipation(String jsonText) {
+        Map<Evenement, Integer> hm = new HashMap();
+
+        try {
+
+            Evenementt = new ArrayList<>();
+            u = new ArrayList<>();
+            JSONParser j = new JSONParser();
+            Map<String, Object> tasksListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            //  System.out.println("tasksListJson: " + tasksListJson);
+            List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
+            //  System.out.println("list: " + list);
+            Club c = new Club();
+            for (Map<String, Object> obj : list) {
+
+                Evenement e = new Evenement();
+                User u = new User();
+                float idd = Float.parseFloat(obj.get("idevenement").toString());
+                e.setIdEvenement((int) idd);
+                e.setDateDebut(obj.get("datedebut").toString());
+                e.setDateFin(obj.get("datefin").toString());
+                e.setImage(obj.get("image").toString());
+                //   System.out.println("xx: "+(obj.get("x").toString()));
+                int nbrParticipants = (int) Float.parseFloat(obj.get("x").toString());
+                hm.put(e, nbrParticipants);
+                //System.out.println("hm" + hm);
+            }
+
+        } catch (IOException ex) {
+
+        }
+        return hm;
+    }
 }

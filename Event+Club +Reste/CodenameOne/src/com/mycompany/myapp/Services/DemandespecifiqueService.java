@@ -98,4 +98,47 @@ public ArrayList<Club> parseClubspecifique(String jsonText) {
         }
         return clubb;
     }
+boolean xx=false;
+    public boolean getTestResp(int id) {
+        System.out.println("************************id=:"+id);
+        String url = "http://localhost/projet/schoolMgt/web/app_dev.php/user/c/"+id;
+        System.out.println(url);
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                String res = new String(req.getResponseData());
+                System.out.println("resultats user tesr*************************************************************************: "+res);
+                xx = parseTestPart(res);
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return xx;
+    }
+    boolean yy=true;
+ public boolean parseTestPart(String jsonText)  {
+     System.out.println("jsonText parseTestPart: "+jsonText);
+      if(jsonText.equals("[null]"))
+         {
+                return false;
+         }
+     
+      
+  return true;
+ }
+  public boolean editClub(Club c) {
+        String url =Statics.BASE_URL +"user/club/clubedit/"+c.getIdClub()+"/"+c.getImage()+"/"+c.getDomaine();
+        req.setUrl(url);
+        System.out.println("et voilaaa:  "+url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
 }

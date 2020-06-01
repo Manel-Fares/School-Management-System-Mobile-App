@@ -31,7 +31,6 @@ import com.mycompany.myapp.entities.Evenement;
 import com.mycompany.myapp.entities.Participation;
 import com.mycompany.myapp.entities.User;
 
-
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.HashMap;
@@ -44,7 +43,8 @@ import java.util.Map;
 public class EvenementDetailForm extends SideMenuEtudiantForm1 {
 
     public EvenementDetailForm(Resources res, int id, String nomclub, int IdClub) {
-                 super(BoxLayout.y());
+        super(BoxLayout.y());
+        ServiceParticipation aa = new ServiceParticipation();
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
         Button menuButton = new Button("");
@@ -65,37 +65,42 @@ public class EvenementDetailForm extends SideMenuEtudiantForm1 {
         ImageViewer iv = null;
         EncodedImage ec;
         ImageViewer img;
-     //   current = this;
-        
-     //   System.out.println("nom du club: " + nomclub);
+        //   current = this;
+
+        //   System.out.println("nom du club: " + nomclub);
         Map<Evenement, Integer> Evenements = new HashMap<>();
-        Evenements = ServiceParticipation.getInstance().getEeventDetail(id);
-        boolean test = ServiceParticipation.getInstance().getTestPart(Integer.parseInt(User.getCurrentId()),id);
-    //    System.out.println("testttt: "+test);
+        Evenements = aa.getInstance().getEeventDetail(id);
+        boolean test = aa.getInstance().getTestPart(Integer.parseInt(User.getCurrentId()), id);
+        //    System.out.println("testttt: "+test);
         for (Map.Entry<Evenement, Integer> entry : Evenements.entrySet()) {
 
             try {
                 Container c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
                 Button btnPartciper = new Button();
                 String charr;
-                
+
                 Label l = new Label(entry.getKey().getImage());
                 float idd = Float.parseFloat(entry.getValue().toString());
                 int nbrParticipant = ((int) idd);
+                Image dated = Image.createImage("/calendar1.png");
+                Image datef = Image.createImage("/calendar2.png");
+                Image group = Image.createImage("/group.png");
+                Image organisant = Image.createImage("/organisant.png");
 
-                Label l0 = new Label("nombre Partcipants: " + entry.getValue());
-                Label l1 = new Label(entry.getKey().getDateDebut());
-                Label l2 = new Label(entry.getKey().getDateFin());
-                Label l3 = new Label(nomclub);
+                Label l0 = new Label("number of participants: " + entry.getValue(), group);
+                Label l1 = new Label("Start date: " + entry.getKey().getDateDebut(), dated);
+                Label l2 = new Label("End date: " + entry.getKey().getDateFin(), datef);
+                Label l3 = new Label("Organized by: " + nomclub, organisant);
                 Label l4 = new Label("" + IdClub);
-            //    setTitle("Event Organised by "+l3.getText());
+                //    setTitle("Event Organised by "+l3.getText());
                 l4.setVisible(false);
-                if(!test){
+                System.out.println("****************testt*****************:      " + test);
+                if (!test) {
                     btnPartciper.setText("Join");
-                   charr="Welcome to our Event at"+ l2.getText();}
-                else {
+                    charr = "Welcome to our Event at" + l2.getText();
+                } else {
                     btnPartciper.setText("Leave");
-                 charr="Next Time  :) ";
+                    charr = "Next Time  :) ";
                 }
                 String url = "http://localhost/projet/schoolMgt/web/images/" + entry.getKey().getImage();
                 ec = EncodedImage.create("/pic.jpeg");
@@ -106,8 +111,8 @@ public class EvenementDetailForm extends SideMenuEtudiantForm1 {
                 c1.add(l1);
                 c1.add(l2);
                 c1.add(l3);
-                c1.add(l4);
                 c1.add(l0);
+                c1.add(l4);
 
                 Container c2 = new Container(new BoxLayout(BoxLayout.X_AXIS));
                 c2.add(c1);
@@ -121,14 +126,10 @@ public class EvenementDetailForm extends SideMenuEtudiantForm1 {
                         Evenement e = new Evenement(id, l1.getText(), l1.getText(), c, l.getText());
                         Participation p = new Participation(User.getCurrentuser(), e);
                         if (ServiceParticipation.getInstance().addParticipation(p)) {
-                            Dialog.show("Success", charr , new Command("OK"));
-                            
-                            
+                            Dialog.show("Success", charr, new Command("OK"));
+
                             new ListEvenementForm(res).show();
-                            
-                            
-                      
-                           
+
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }
@@ -139,7 +140,7 @@ public class EvenementDetailForm extends SideMenuEtudiantForm1 {
                 ex.getMessage();
             }
         }
-    //   getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
+        //   getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 
     }
 
@@ -152,6 +153,4 @@ public class EvenementDetailForm extends SideMenuEtudiantForm1 {
         return i;
     }
 
-
-   
 }

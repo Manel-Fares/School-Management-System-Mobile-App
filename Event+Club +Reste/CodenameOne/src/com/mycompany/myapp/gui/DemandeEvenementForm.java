@@ -7,6 +7,7 @@ package com.mycompany.myapp.gui;
 
 import com.codename1.capture.Capture;
 import com.codename1.l10n.DateFormat;
+import com.codename1.l10n.ParseException;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
@@ -29,14 +30,19 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
+import com.codename1.ui.validation.Constraint;
+import com.codename1.ui.validation.LengthConstraint;
+import com.codename1.ui.validation.Validator;
 import com.mycompany.myapp.Services.DemandespecifiqueService;
-import com.mycompany.myapp.Services.ServiceClub;
+
 import com.mycompany.myapp.Services.ServiceDemandeEvenement;
 import com.mycompany.myapp.entities.Club;
 import com.mycompany.myapp.entities.DemandeEvenement;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.utils.Statics;
 import java.util.ArrayList;
+import java.util.Date;
+
 import rest.file.uploader.tn.FileUploader;
 
 /**
@@ -49,11 +55,24 @@ public class DemandeEvenementForm extends SideMenuEtudiantForm1 {
     private FileUploader file;
     String fileNameInserver;
     private String imgPath;
+    Validator val = new Validator();
+    boolean xx = false;
+    boolean val1 = true;
+    boolean val2 = true;
+    boolean val3 = true;
+    boolean val4 = true;
+    boolean val5 = true;
+    boolean val11 = false;
+    boolean val22 = false;
+    boolean val33 = false;
+    boolean val44 = false;
+    boolean val55 = false;
 
     public DemandeEvenementForm(Resources res) {
-       super(BoxLayout.y());
+        super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
+
         Button menuButton = new Button("");
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
@@ -75,6 +94,7 @@ public class DemandeEvenementForm extends SideMenuEtudiantForm1 {
         description.setSize(d);
         TextField budget = new TextField();
         budget.setHint("budget");
+        Date date = new Date();
         Picker dd = new Picker();
         Picker df = new Picker();
         Button btnSend = new Button("send");
@@ -96,6 +116,94 @@ public class DemandeEvenementForm extends SideMenuEtudiantForm1 {
         c1.add(df);
         c1.add(picture);
         c1.add(btnSend);
+        val.addConstraint(budget, new Constraint() {
+            public boolean isValid(Object value) {
+                String v = (String) value;
+
+                if (v.length() != 0) {
+                    for (int i = 0; i < v.length(); i++) {
+                        char c = v.charAt(i);
+                        if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') {
+                            val11 = true;
+
+                            return true;
+                        }
+                        val1 = false;
+                        return false;
+                    }
+                }
+                val1 = false;
+                return false;
+            }
+
+            @Override
+            public String getDefaultFailMessage() {
+                return "Must be valid phone number";
+            }
+        });
+
+        val.addConstraint(dd, new Constraint() {
+            public boolean isValid(Object value) {
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+                String datee = dateFormat.format(date);
+                int datecurrent = Integer.parseInt(datee);
+                String dated = dateFormat.format(dd.getDate());
+                int datedeb = Integer.parseInt(dated);
+                String datef = dateFormat.format(df.getDate());
+                int datefin = Integer.parseInt(datef);
+
+                if (datedeb - datecurrent >= 0 && datefin - datedeb > 0) {
+                    val33 = true;
+
+                    return true;
+
+                } else {
+                    val3 = false;
+                    return xx;
+                }
+            }
+
+            public String getDefaultFailMessage() {
+                return "Must be valid date ";
+            }
+        });
+
+        val.addConstraint(df, new Constraint() {
+            public boolean isValid(Object value) {
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+                String datee = dateFormat.format(date);
+                int datecurrent = Integer.parseInt(datee);
+                String dated = dateFormat.format(dd.getDate());
+                int datedeb = Integer.parseInt(dated);
+                String datef = dateFormat.format(df.getDate());
+                int datefin = Integer.parseInt(datef);
+
+                if (datefin - datecurrent > 0 && datefin - datedeb > 0) {
+
+                    val44 = true;
+                    System.out.println("val3: " + val4);
+                    return true;
+                } else {
+
+                    val4 = false;
+                    System.out.println("val3: " + val4);
+                    return xx;
+                }
+            }
+        
+
+            public String getDefaultFailMessage() {
+                return "Must be valid date ";
+            }
+        });
+       
+         val.addConstraint(description, new LengthConstraint(1));
+         if (DemandespecifiqueService.getInstance().getTestResp(Integer.parseInt(User.getCurrentId()))) {
+            tb.addCommandToOverflowMenu("consult Demande Event", null, e -> new ConsulterDemandeEventform(res).show());
+        }
+        
         add(c1);
         Club c = new Club();
         picture.addPointerReleasedListener(new ActionListener() {
@@ -118,26 +226,38 @@ public class DemandeEvenementForm extends SideMenuEtudiantForm1 {
 
             }
         });
+        if (fileNameInserver == null) {
+            val55 = false;
+        } else {
+            val5 = true;
+        }
+
         btnSend.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                
+      if(!val.isValid() ||fileNameInserver==null)
+      { Dialog.show("error", "verifie your champs", new Command("OK"));}
+      else 
+      {
+
                 c.setNomClub(club.getSelectedItem().toString());
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String ddd = dateFormat.format(dd.getDate());
                 String ddf = dateFormat.format(df.getDate());
-                  System.out.println(fileNameInserver);
+                System.out.println(fileNameInserver);
                 DemandeEvenement dev = new DemandeEvenement(c, description.getText(),
-                        
-                        ddd.toString(), ddf.toString(), "non valider ", Float.parseFloat(budget.getText()),fileNameInserver);
-                
+                        ddd.toString(), ddf.toString(), "non valider ", Float.parseFloat(budget.getText()), fileNameInserver);
+
                 if (ServiceDemandeEvenement.getInstance().addDemande(dev)) {
-                    Dialog.show("Success", "Connection accepted", new Command("OK"));
+                    Dialog.show("Success", "demand sended", new Command("OK"));
+                    new ConsulterDemandeEventform(res).show();
                 } else {
                     Dialog.show("ERROR", "Server error", new Command("OK"));
                 }
             }
-        });
-  setupSideMenu(res);        // getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
+            }});
+        setupSideMenu(res);        // getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 
     }
 
@@ -149,8 +269,5 @@ public class DemandeEvenementForm extends SideMenuEtudiantForm1 {
         g.fillArc(0, 0, size, size, 0, 360);
         return i;
     }
-
-  
-
 
 }

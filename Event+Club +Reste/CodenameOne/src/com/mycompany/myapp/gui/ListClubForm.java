@@ -28,6 +28,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.Services.DemandespecifiqueService;
 import com.mycompany.myapp.Services.ServiceClub;
 import com.mycompany.myapp.Services.ServiceRate;
 import com.mycompany.myapp.entities.Club;
@@ -49,7 +50,8 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
     Image imgg = null;
     ImageViewer iv = null;
     EncodedImage ec;
-     private void initStarRankStyle(Style s, Image star) {
+
+    private void initStarRankStyle(Style s, Image star) {
         s.setBackgroundType(Style.BACKGROUND_IMAGE_TILE_BOTH);
         s.setBorder(Border.createEmpty());
         s.setBgImage(star);
@@ -58,7 +60,7 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
 
     private Slider createStarRankSlider(int r) {
         Slider starRank = new Slider();
-        starRank.setEditable(true);
+        starRank.setEditable(false);
         starRank.setMinValue(0);
         starRank.setMaxValue(5);
         starRank.setProgress(r);
@@ -74,7 +76,7 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
         initStarRankStyle(starRank.getSliderFullSelectedStyle(), fullStar);
         initStarRankStyle(starRank.getSliderFullUnselectedStyle(), fullStar);
         // starRank.setPreferredSize(new Dimension(fullStar.getWidth() * 5, fullStar.getHeight()));
-        
+
         return starRank;
     }
 
@@ -95,17 +97,23 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
 
         tb.setTitleComponent(titleCmp);
         setupSideMenu(res);
-
+ if (DemandespecifiqueService.getInstance().getTestResp(Integer.parseInt(User.getCurrentId()))) {
+            tb.addCommandToOverflowMenu("Demande Event", null, e -> new DemandeEvenementForm(res).show());
+            tb.addCommandToOverflowMenu("consult Demande Event", null, e -> new ConsulterDemandeEventform(res).show());
+            tb.addCommandToOverflowMenu("your Club", null, e -> new ClubSpecifiqueForm(res).show());
+            tb.addCommandToOverflowMenu("your Events", null, e -> new EvenementClubSpecifiqueForm(res).show());
+        }
+        
         ArrayList<Club> clubs;
         clubs = ServiceClub.getInstance().getClub();
         for (Club c : clubs) {
             try {
-               Container c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-               Container c2 = new Container(new BoxLayout(BoxLayout.X_AXIS));
+                Container c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+                Container c2 = new Container(new BoxLayout(BoxLayout.X_AXIS));
                 Map<Club, Float> rate = new HashMap<>();
                 rate = ServiceRate.getInstance().getAllTasks(c.getIdClub());
-                System.out.println("imageeeeeeee ::::::");
-                System.out.println(c.getImage());
+              //  System.out.println("imageeeeeeee ::::::");
+               // System.out.println(c.getImage());
                 Label l = new Label(c.getNomClub());
                 Label l1 = new Label(c.getDomaine());
                 Label l2 = new Label(c.getResponsable().getUsername());
@@ -116,7 +124,7 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
                 imgg = URLImage.createToStorage(ec, url, url, URLImage.RESIZE_SCALE);
                 iv = new ImageViewer(imgg);
                 c1.add(l);
-              
+
                 //c1.add(iv);
                 for (Map.Entry<Club, Float> entry : rate.entrySet()) {
                     {
@@ -127,20 +135,31 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
 //;                     }
                 }
                 // createStarRankSlider
-//                c1.add(l);
+                //   c1.add(l);
 //                c1.add(l1);
 //                c1.add(l2);
 //                c1.add(l3);
-               c2.add(iv);
+                c2.add(iv);
                 c2.add(c1);
+
+//                c2.getStyle().setBgColor(0xFFFFFF);
+//                c2.getStyle().setBgTransparency(255);
+                getStyle().setBgColor(0xD4F2F7);
+                getStyle().setBgTransparency(255);
+                Slider xx = new Slider();
+                xx.setWidth(1);
+                xx.setHeight(1);
                 add(c2);
-                iv.addPointerReleasedListener(e -> new ClubDetailForm( res, Integer.parseInt(l3.getText())).show());   } catch (IOException ex) {
+                add(xx);
+
+                iv.addPointerReleasedListener(e -> new ClubDetailForm(res, Integer.parseInt(l3.getText())).show());
+            } catch (IOException ex) {
                 ex.getMessage();
             }
         }
-       // setupSideMenu(res,current);
-   //    getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
-       
+        // setupSideMenu(res,current);
+        //    getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
+
     }
 
     private Image colorCircle(int color) {
@@ -151,8 +170,5 @@ public class ListClubForm extends SideMenuEtudiantForm1 {
         g.fillArc(0, 0, size, size, 0, 360);
         return i;
     }
-
-
-
 
 }

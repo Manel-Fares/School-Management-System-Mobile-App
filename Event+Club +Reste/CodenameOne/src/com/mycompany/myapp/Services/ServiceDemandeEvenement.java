@@ -126,6 +126,7 @@ public  ArrayList<DemandeEvenement> parseDmndEvenement(String jsonText) {
                 e.setImage(obj.get("image").toString());
                 e.setDescription(obj.get("description").toString());
                 e.setEtat(obj.get("etat").toString());
+                e.setBudget(Float.parseFloat(obj.get("budget").toString()));
                // float id = Float.parseFloat(obj.get("idclub").toString());
               
                 DemandeEvenementt.add(e);

@@ -12,10 +12,12 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Club;
+import com.mycompany.myapp.entities.Evenement;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +51,6 @@ public class ServiceClub {
         }
         return instance;
     }
-
- 
 
     public ArrayList<Club> getClub() {
         String url = Statics.BASE_URL + "user/club/all";
@@ -134,37 +134,6 @@ public class ServiceClub {
         }
         return clubb;
     }
+   
 
-    
- boolean xx=false;
-    public boolean getTestResp(int id) {
-        System.out.println("************************id=:"+id);
-        String url = "http://localhost/projet/schoolMgt/web/app_dev.php/user/club/"+id;
-        System.out.println(url);
-        req.setUrl(url);
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                String res = new String(req.getResponseData());
-                System.out.println("resultats user tesr*************************************************************************: "+res);
-                xx = parseTestPart(res);
-
-            }
-        });
-        NetworkManager.getInstance().addToQueueAndWait(req);
-        return xx;
-    }
-    boolean yy=true;
- public boolean parseTestPart(String jsonText)  {
-     System.out.println("jsonText parseTestPart: "+jsonText);
-      if(jsonText.equals("[null]"))
-         {
-                return false;
-         }
-     
-      
-  return true;
- }
 }
-
-

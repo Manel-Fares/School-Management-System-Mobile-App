@@ -90,7 +90,7 @@ public class chartsEvenementsForm extends SideMenuEtudiantForm1 {
         tb.setTitleComponent(titleCmp);
      
         // Generate the values
-        double[] values = new double[]{12, 14, 11, 10, 19};
+        //double[] values = new double[]{12, 14, 11, 10, 19};
 
         // Set up the renderer
         int[] colors = new int[]{ ColorUtil.rgb(255, 0, 127), ColorUtil.rgb(255, 204, 153), ColorUtil.rgb(255, 20, 103),  ColorUtil.rgb(255, 204, 153),  ColorUtil.rgb(255, 153, 255)};
@@ -113,6 +113,7 @@ public class chartsEvenementsForm extends SideMenuEtudiantForm1 {
         
         // Wrap the chart in a Component so we can add it to a form
         ChartComponent c = new ChartComponent(chart);
+    
         add(c);
         // Create a form and show it. 
           setupSideMenu(res);
