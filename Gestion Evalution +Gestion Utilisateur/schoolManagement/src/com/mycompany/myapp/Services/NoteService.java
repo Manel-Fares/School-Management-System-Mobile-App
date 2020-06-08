@@ -103,7 +103,7 @@ public class NoteService {
                 n.setNoteDS(noteds);
                 n.setNoteCC(Float.parseFloat(obj.get("notecc").toString()));
                 
-                n.setMoyenne((float)(Math.round(Float.parseFloat(obj.get("moyenne").toString())*1000)/1000));
+                n.setMoyenne(Float.parseFloat(obj.get("moyenne").toString()));
                 n.setNoteExam(Float.parseFloat(obj.get("noteexam").toString()));
                 //  n.getMatiere().setNomMatiere(obj.get("matiere").toString());
 

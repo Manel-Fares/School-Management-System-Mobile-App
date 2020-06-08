@@ -95,7 +95,7 @@ public class AjoutNoteForm extends SideMenuEnseignantForm1 {
         cb.getAllStyles().setBgColor(ColorUtil.rgb(153, 0, 76));
         cb.setPreferredW(350);
 
-        ArrayList<Classe> c = NoteService.getInstance().getClasses("2");
+        ArrayList<Classe> c = NoteService.getInstance().getClasses(User.getCurrentId());
         for (Classe cl : c) {
             cb.addItem(cl.getName());
         }

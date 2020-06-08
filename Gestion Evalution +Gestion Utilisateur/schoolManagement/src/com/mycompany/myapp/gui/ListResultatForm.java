@@ -7,6 +7,7 @@ package com.mycompany.myapp.gui;
 
 import com.codename1.charts.util.ColorUtil;
 import static com.codename1.charts.util.ColorUtil.BLACK;
+import static com.codename1.charts.util.ColorUtil.BLUE;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Font;
@@ -54,47 +55,52 @@ public class ListResultatForm extends SideMenuPersonnelForm1 {
         Font lbl = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 
         ArrayList<Resultat> r = ResultatService.getInstance().getResultat();
-        {
 
-            Container cn = new Container(BoxLayout.y());
-            tb.addCommandToOverflowMenu("Calculate Result", null, e -> {
-                 ResultatService.getInstance().calculResults();
-               cnAll.removeAll();
-               cn.removeAll();
+        Container cn = new Container(BoxLayout.y());
 
-                for (Resultat result : r) {
-                    Label nomprenom = new Label( "     " + result.getEtudiant().getNomUser());
-                    nomprenom.getAllStyles().setFgColor(ColorUtil.rgb(0, 76, 153));
-                    nomprenom.getUnselectedStyle().setFont(lbl);
+        for (Resultat result : r) {
+            Label nomprenom = new Label("     " + result.getEtudiant().getPrenomUser() + "   " + result.getEtudiant().getNomUser());
+            nomprenom.getAllStyles().setFgColor(ColorUtil.rgb(0, 76, 153));
+            nomprenom.getUnselectedStyle().setFont(lbl);
 
-                    Label resultat = new Label(String.valueOf(result.getResultat()));
-                    resultat.getUnselectedStyle().setFgColor(BLACK);
-                    resultat.getUnselectedStyle().setFont(lbl);
-                    Container affichage = GridLayout.encloseIn(2, nomprenom, resultat);
+            Label resultat = new Label(String.valueOf(result.getResultat()));
+            resultat.getUnselectedStyle().setFgColor(BLACK);
+            resultat.getUnselectedStyle().setFont(lbl);
+            Container affichage = GridLayout.encloseIn(2, nomprenom, resultat);
 
-                    cn.add(affichage);
-
-                }                cnAll.add(cn);
-
-
-            });
+            cn.add(affichage);
 
         }
-        
-         Container cn = new Container(BoxLayout.y());
+        cnAll.add(cn);
 
-         tb.addCommandToOverflowMenu("Delete Result", null, e -> {
-             ResultatService.getInstance().deleteResults();
-               cnAll.removeAll();
-               cn.removeAll();
+        tb.addCommandToOverflowMenu("Calculate Result", null, e -> {
+            ResultatService.getInstance().calculResults();          
+          //  cnAll.removeAll();
+            //cn.removeAll();
+            for (Resultat result : r) {
+            Label nomprenom = new Label("     " + result.getEtudiant().getPrenomUser() + "   " + result.getEtudiant().getNomUser());
+            nomprenom.getAllStyles().setFgColor(ColorUtil.rgb(0, 76, 153));
+            nomprenom.getUnselectedStyle().setFont(lbl);
 
-               
-               
+            Label resultat = new Label(String.valueOf(result.getResultat()));
+            resultat.getUnselectedStyle().setFgColor(BLACK);
+            resultat.getUnselectedStyle().setFont(lbl);
+            Container affichage = GridLayout.encloseIn(2, nomprenom, resultat);
 
-            });
+            cn.add(affichage);
 
-        
-        
+        }
+        cnAll.add(cn);
+        });
+
+        tb.addCommandToOverflowMenu("Delete Result", null, e -> {
+                    ResultatService.getInstance().deleteResults();
+                    cnAll.removeAll();
+                    cn.removeAll();
+
+                }
+        );
+
     }
 
 }

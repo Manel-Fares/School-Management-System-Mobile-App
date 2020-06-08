@@ -48,7 +48,7 @@ public class RegisterForm extends SideMenuAdminForm {
     String filename;
     private String pathImg;
   
-    private Resources theme = UIManager.initFirstTheme("/theme2");
+    private Resources theme;
 
     public RegisterForm(Resources res) {
         super(BoxLayout.y());

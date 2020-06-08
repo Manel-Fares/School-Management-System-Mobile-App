@@ -31,8 +31,9 @@ import java.util.Map;
  * @author Aymen
  */
 public class ResultatService {
+
     public ArrayList<Resultat> resultats;
-    
+
     public LinkedHashMap<String, Object> subject = new LinkedHashMap<>();
     public LinkedHashMap<String, Object> teacher = new LinkedHashMap<>();
     public LinkedHashMap<String, Object> student = new LinkedHashMap<>();
@@ -65,32 +66,33 @@ public class ResultatService {
             for (Map<String, Object> obj : list) {
 
                 Resultat r = new Resultat();
-             
+
                 r.setResultat(Float.parseFloat(obj.get("resultat").toString()));
                 student = (LinkedHashMap) obj.get("etudiant");
-                   
+
                 for (Map.Entry<String, Object> entry : student.entrySet()) {
-                    User u = new User();
+
                     if (entry.getKey().contains("id")) {
                         String pp = entry.getValue().toString();
-           
-                        int idd =(int) Float.parseFloat(pp);
+
+                        int idd = (int) Float.parseFloat(pp);
+                        
                         r.getEtudiant().setId(String.valueOf(idd));
                     }
-                     if (entry.getKey().contains("prenomuser")) {
+                    if (entry.getKey().contains("prenomuser")) {
 
                         r.getEtudiant().setPrenomUser(entry.getValue().toString());
                     }
-                      
-                     if (entry.getKey().contains("nomuser")) {
+
+                    if (entry.getKey().contains("nomuser")) {
+                        System.out.println("nom "+entry.getValue().toString());
 
                         r.getEtudiant().setNomUser(entry.getValue().toString());
                     }
-                  //    System.out.println(r.getEtudiant().getNomUser());
+                    
+                        System.out.println("Nom: "+r.getEtudiant().getNomUser()+"  Prenom :  "+r.getEtudiant().getPrenomUser());
 
                 }
-                
-               
 
                 resultats.add(r);
             }
@@ -115,7 +117,8 @@ public class ResultatService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultats;
     }
-     public void deleteResults () {
+
+    public void deleteResults() {
         String url = Statics.BASE_URL + "user/deleteres";
         req.setUrl(url);
         req.setPost(false);
@@ -135,7 +138,8 @@ public class ResultatService {
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
     }
-     public void calculResults () {
+
+    public void calculResults() {
         String url = Statics.BASE_URL + "user/calculres";
         req.setUrl(url);
         req.setPost(false);
@@ -145,15 +149,8 @@ public class ResultatService {
                 resultOK = req.getResponseCode() == 200;
                 req.removeResponseListener(this);
                 if (resultOK) {
-                    Message m = new Message("<html><body>Check out <a href=\"https://www.codenameone.com/\">Codename One</a></body></html>");
-                    m.setMimeType(Message.MIME_HTML);
-
-// notice that we provide a plain text alternative as well in the send method
-                    boolean success = m.sendMessageViaCloudSync("Go Check your Resultat ", "manel.fares@esprit.tn", "Name Of User", "Message Subject",
-                            "Check out Codename One at https://www.codenameone.com/");
 
                     Dialog.show("Success", "All results have been calculated", new Command("OK"));
-                    //new ListResultatForm().show();
                 } else {
                     Dialog.show("ERROR", "Failed to calculate the results. Results are already calculated!", new Command("OK"));
                 }
@@ -163,8 +160,8 @@ public class ResultatService {
         NetworkManager.getInstance().addToQueueAndWait(req);
     }
 
-       public ArrayList<Resultat> getOneResultat(String id) {
-             String url = Statics.BASE_URL + "user/resetudiant/"+id;
+    public ArrayList<Resultat> getOneResultat(String id) {
+        String url = Statics.BASE_URL + "user/resetudiant/" + id;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
