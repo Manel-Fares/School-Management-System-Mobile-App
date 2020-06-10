@@ -59,7 +59,7 @@ public class ListResultatForm extends SideMenuPersonnelForm1 {
         Container cn = new Container(BoxLayout.y());
 
         for (Resultat result : r) {
-            Label nomprenom = new Label("     " + result.getEtudiant().getPrenomUser() + "   " + result.getEtudiant().getNomUser());
+            Label nomprenom = new Label("     " + result.getEtudiant().getPrenomUser() );
             nomprenom.getAllStyles().setFgColor(ColorUtil.rgb(0, 76, 153));
             nomprenom.getUnselectedStyle().setFont(lbl);
 

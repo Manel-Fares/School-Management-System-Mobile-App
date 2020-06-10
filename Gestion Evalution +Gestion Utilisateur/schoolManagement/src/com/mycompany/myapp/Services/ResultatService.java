@@ -68,6 +68,7 @@ public class ResultatService {
                 Resultat r = new Resultat();
 
                 r.setResultat(Float.parseFloat(obj.get("resultat").toString()));
+                System.out.println(r.getResultat());
                 student = (LinkedHashMap) obj.get("etudiant");
 
                 for (Map.Entry<String, Object> entry : student.entrySet()) {
@@ -85,12 +86,12 @@ public class ResultatService {
                     }
 
                     if (entry.getKey().contains("nomuser")) {
-                        System.out.println("nom "+entry.getValue().toString());
+                    //    System.out.println("nom "+entry.getValue().toString());
 
                         r.getEtudiant().setNomUser(entry.getValue().toString());
                     }
                     
-                        System.out.println("Nom: "+r.getEtudiant().getNomUser()+"  Prenom :  "+r.getEtudiant().getPrenomUser());
+//                        System.out.println("Nom: "+r.getEtudiant().getNomUser()+"  Prenom :  "+r.getEtudiant().getPrenomUser());
 
                 }
 
